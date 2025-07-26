@@ -101,3 +101,7 @@ InitTestScene*.unity*
 /[Aa]ssets/Packages*
 Assets/NuGet.config
 Assets/NuGet.config.meta
+
+/[Aa]ssets/Plugins*
+Assets/Resources/DOTweenSettings.asset
+Assets/Resources/DOTweenSettings.asset.meta
