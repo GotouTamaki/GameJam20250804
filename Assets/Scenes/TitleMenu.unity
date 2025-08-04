@@ -3121,14 +3121,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sfxSource: {fileID: 659040429}
   musicSource: {fileID: 1898200118}
-  titleBgm: {fileID: 0}
-  gameBgm: {fileID: 0}
-  startButtonSfx: {fileID: 0}
+  titleBgm: {fileID: 8300000, guid: dff351ef5f89e9444a842cd3bc08503b, type: 3}
+  gameBgm: {fileID: 8300000, guid: a4757771ae715974088668f4d502dd18, type: 3}
+  startButtonSfx: {fileID: 8300000, guid: 2fb43625f1c3e52408c11ca650ee659c, type: 3}
   buttonSfx: {fileID: 0}
   shootSfx: {fileID: 0}
   comboSfx: {fileID: 0}
-  sfxVolume: 0.5
-  musicVolume: 0.5
+  countdownSfx: {fileID: 8300000, guid: d190522843fafa34e929d5e08235853c, type: 3}
+  countdownOverSfx: {fileID: 8300000, guid: b86d7eb6d7f5ba144939e42882d96d90, type: 3}
+  sfxVolume: 1
+  musicVolume: 1
 --- !u!4 &1954599068
 Transform:
   m_ObjectHideFlags: 0
