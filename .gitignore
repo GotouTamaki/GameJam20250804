@@ -105,3 +105,8 @@ Assets/NuGet.config.meta
 /[Aa]ssets/Plugins*
 Assets/Resources/DOTweenSettings.asset
 Assets/Resources/DOTweenSettings.asset.meta
+Assets/Kuwahara/Font.meta
+Assets/Kuwahara/Font/g_brushtappitsu_freeR SDF.asset
+Assets/Kuwahara/Font/g_brushtappitsu_freeR SDF.asset.meta
+Assets/Kuwahara/Font/g_brushtappitsu_freeR.ttf
+Assets/Kuwahara/Font/g_brushtappitsu_freeR.ttf.meta
