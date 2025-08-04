@@ -77,7 +77,7 @@ public class ShowHideSettings : MonoBehaviour
         if (bgmSlider == null || sfxSlider == null || SoundManager.Instance == null)
             return;
 
-        bgmSlider.value = PlayerPrefs.GetFloat("MusicVolume", 1f);
-        sfxSlider.value = PlayerPrefs.GetFloat("SFXVolume", 1f);
+        bgmSlider.value = SoundManager.Instance.GetMusicVolume();
+        sfxSlider.value = SoundManager.Instance.GetSFXVolume();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -28,9 +29,23 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
+    [SerializeField] float _maxStomachFill = 100;
+    int _stomachFill = default;
+    public int StomachFill
+    {
+        get { return _stomachFill; }
+        set
+        {
+            _stomachFill = value;
+            Debug.Log("StomachFill updated: " + _stomachFill);
+        }
+    }
+
+
     [Header("オブジェクトアタッチ用")]
     [SerializeField] private TextMeshProUGUI _scoreText = default;
     [SerializeField] private TextMeshProUGUI _moneyText = default;
+    [SerializeField] private Image _stomachFillImage = default;
 
     void UpdateScore()
     {
@@ -39,6 +54,11 @@ public class ScoreManager : MonoBehaviour
     void UpdateMoney()
     {
         _moneyText.text = IntToKanjiString(Money);
+    }
+
+    void UpdateStomachFill()
+    {
+        _stomachFillImage.fillAmount = (float)StomachFill / _maxStomachFill; // Assuming max stomach fill is 100
     }
 
     public string IntToKanjiString(int value)

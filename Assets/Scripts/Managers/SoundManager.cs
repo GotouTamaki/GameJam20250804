@@ -7,18 +7,20 @@ public class SoundManager : MonoBehaviour
     public static SoundManager Instance { get; private set; }
 
     [Header("オーディオソース")]
-    [SerializeField] private AudioSource sfxSource;
-    [SerializeField] private AudioSource musicSource;
+    public AudioSource sfxSource;
+    public AudioSource musicSource;
 
     [Header("BGM")]
-    [SerializeField] private AudioClip titleBgm;
-    [SerializeField] private AudioClip gameBgm;
+    public AudioClip titleBgm;
+    public AudioClip gameBgm;
 
     [Header("効果音")]
-    [SerializeField] private AudioClip startButtonSfx;
-    [SerializeField] private AudioClip buttonSfx;
-    [SerializeField] private AudioClip shootSfx;
-    [SerializeField] private AudioClip comboSfx;
+    public AudioClip startButtonSfx;
+    public AudioClip buttonSfx;
+    public AudioClip shootSfx;
+    public AudioClip comboSfx;
+    public AudioClip countdownSfx;
+    public AudioClip countdownOverSfx;
 
     [Header("音量設定")]
     [SerializeField, Range(0f, 1f)] private float sfxVolume = 0.3f;
@@ -74,7 +76,7 @@ public class SoundManager : MonoBehaviour
                 PlayMusic(titleBgm);
                 break;
             case "InGame":
-                PlayMusic(gameBgm);
+                musicSource.Stop();
                 break;
             default:
                 break;
@@ -109,6 +111,8 @@ public class SoundManager : MonoBehaviour
     public void PlayButtonSFX() => PlaySFX(buttonSfx);
     public void PlayShootSFX() => PlaySFX(shootSfx);
     public void PlayComboSFX() => PlaySFX(comboSfx);
+    public void PlayCountdownSFX() => PlaySFX(countdownSfx);
+    public void PlayCountdownOverSFX() => PlaySFX(countdownOverSfx);
 
     // BGM音量を設定して保存
     public void SetMusicVolume(float volume)
@@ -119,6 +123,11 @@ public class SoundManager : MonoBehaviour
         PlayerPrefs.Save();
     }
 
+    public float GetMusicVolume()
+    {
+        return musicVolume;
+    }
+
     // 効果音音量を設定して保存
     public void SetSFXVolume(float volume)
     {
@@ -126,6 +135,10 @@ public class SoundManager : MonoBehaviour
         sfxSource.volume = sfxVolume;
         PlayerPrefs.SetFloat("SFXVolume", sfxVolume);
         PlayerPrefs.Save();
+    }
+    public float GetSFXVolume()
+    {
+        return sfxVolume;
     }
 
     // 音量設定をオーディオソースに適用
