@@ -5,6 +5,7 @@ using System.Collections;
 public class SceneChangeManager : MonoBehaviour
 {
     public GameObject soundManagerPrefab;
+    private bool isLoading = false;
 
     void Awake()
     {
@@ -16,12 +17,17 @@ public class SceneChangeManager : MonoBehaviour
 
     public void GoToGame()
     {
-        StartCoroutine(WaitUntilSFXHasFinished());
+        if (!isLoading)
+        {
+            isLoading = true;
+            StartCoroutine(WaitUntilSFXHasFinished());
+        }
     }
 
     public void GoToTitle()
     {
         SceneManager.LoadScene("TitleMenu");
+        SoundManager.Instance.startButtonSfxHasPlayed = false;
     }
 
     public void ExitGame()
@@ -31,10 +37,14 @@ public class SceneChangeManager : MonoBehaviour
 
     private IEnumerator WaitUntilSFXHasFinished()
     {
-        SoundManager.Instance.musicSource.Stop();
-        SoundManager.Instance.PlayStartSFX();
+        if (!SoundManager.Instance.startButtonSfxHasPlayed)
+        {
+            SoundManager.Instance.musicSource.Stop();
+            SoundManager.Instance.PlayStartSFX();
+            SoundManager.Instance.startButtonSfxHasPlayed = true;
+        }
 
-        yield return new WaitForSeconds(2.8f);
+        yield return new WaitForSeconds(3f);
 
         SceneManager.LoadScene("InGame");
     }
