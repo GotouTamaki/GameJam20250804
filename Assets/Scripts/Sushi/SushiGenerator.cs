@@ -2,7 +2,8 @@
 
 public class SushiGenerator : MonoBehaviour
 {
-    [SerializeField] private Transform[] _generateTransforms;
+    [SerializeField] private Transform[] _leftGenerateTransforms;
+    [SerializeField] private Transform[] _rightGenerateTransforms;
     [SerializeField] private GameObject[] _generatePrefabs;
     [SerializeField] private int[] _generateWeights;
     [SerializeField] private float _initInterval = 0.5f;
@@ -21,11 +22,24 @@ public class SushiGenerator : MonoBehaviour
     {
         if (_timer > _currentInterval)
         {
-            if (_generateTransforms.Length <= 0 || _generatePrefabs.Length <= 0 || _generateWeights.Length <= 0) return;
+            if (_leftGenerateTransforms.Length <= 0 || _generatePrefabs.Length <= 0 || _generateWeights.Length <= 0) return;
 
-            Vector3 generatePosition = _generateTransforms[Random.Range(0, _generateTransforms.Length - 1)].position;
+            Vector3 generatePosition = Vector3.zero;
+            int randamLR = Random.Range(0, 1);
+
+            if (randamLR is 0)
+            {
+                generatePosition = _leftGenerateTransforms[Random.Range(0, _leftGenerateTransforms.Length - 1)].position;
+            }
+            else
+            {
+                generatePosition = _rightGenerateTransforms[Random.Range(0, _rightGenerateTransforms.Length - 1)].position;
+            }
+
             int num = Choose(_generateWeights);
-            Instantiate(_generatePrefabs[num], generatePosition, _generatePrefabs[num].transform.rotation);
+            GameObject prefab = Instantiate(_generatePrefabs[num], generatePosition, _generatePrefabs[num].transform.rotation);
+            SushiMove sushiMove = prefab.GetComponent<SushiMove>();
+            sushiMove.SetDirection(MoveDirectionType.Left);
             _timer = 0;
         }
 
