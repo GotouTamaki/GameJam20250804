@@ -257,7 +257,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 146, y: 0}
   m_SizeDelta: {x: 800, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &377592289
@@ -817,6 +817,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35c06d9c986cf1a46b5eb830a828f2d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _score: 0
   _money: 10000
   _maxStomachFill: 100
   _scoreText: {fileID: 377592289}
@@ -852,9 +853,9 @@ MonoBehaviour:
   _scoreTest:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1057596894}
-        m_TargetAssemblyTypeName: ScoreTester, Assembly-CSharp
-        m_MethodName: ScoreUp
+      - m_Target: {fileID: 1057596892}
+        m_TargetAssemblyTypeName: ScoreManager, Assembly-CSharp
+        m_MethodName: SetScore
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -867,9 +868,9 @@ MonoBehaviour:
   _moneyTest:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1057596894}
-        m_TargetAssemblyTypeName: ScoreTester, Assembly-CSharp
-        m_MethodName: MoneyDown
+      - m_Target: {fileID: 1057596892}
+        m_TargetAssemblyTypeName: ScoreManager, Assembly-CSharp
+        m_MethodName: SetMoney
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
