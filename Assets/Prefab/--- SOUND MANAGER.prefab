@@ -309,11 +309,10 @@ MonoBehaviour:
   titleBgm: {fileID: 8300000, guid: dff351ef5f89e9444a842cd3bc08503b, type: 3}
   gameBgm: {fileID: 8300000, guid: a4757771ae715974088668f4d502dd18, type: 3}
   startButtonSfx: {fileID: 8300000, guid: 2fb43625f1c3e52408c11ca650ee659c, type: 3}
-  buttonSfx: {fileID: 8300000, guid: 496218486730e734397a4261c861d8ab, type: 3}
-  shootSfx: {fileID: 8300000, guid: fb7ceef9540206447b915a3ed04e2c2f, type: 3}
-  comboSfx: {fileID: 8300000, guid: 1a6ac1635d9d5c94e8f1b7184c32c10d, type: 3}
+  buttonSfx: {fileID: 8300000, guid: 3b7a0ca4a85880245bbf27edfb85c54e, type: 3}
+  shootSfx: {fileID: 0}
+  comboSfx: {fileID: 0}
   countdownSfx: {fileID: 8300000, guid: d190522843fafa34e929d5e08235853c, type: 3}
   countdownOverSfx: {fileID: 8300000, guid: b86d7eb6d7f5ba144939e42882d96d90, type: 3}
   sfxVolume: 1
   musicVolume: 1
-  prefab: {fileID: 1644865341284660563}
