@@ -2,15 +2,7 @@
 
 public class SushiManager : MonoBehaviour
 {
-    [SerializeField] SushiMove sushiMove; // 対象のSushiMoveコンポーネントをInspectorでセット
+    [SerializeField] SushiMove sushiMove;
 
-    public void MoveLeft()
-    {
-        sushiMove.SetDirection(MoveDirectionType.Left);
-    }
 
-    public void MoveRight()
-    {
-        sushiMove.SetDirection(MoveDirectionType.Right);
-    }
 }

@@ -44,6 +44,7 @@ public class SushiGenerator : MonoBehaviour
         }
 
         _timer += Time.deltaTime;
+
     }
 
     /// <summary>抽選メソッド</summary>
