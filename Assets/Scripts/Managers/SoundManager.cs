@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
@@ -28,17 +29,15 @@ public class SoundManager : MonoBehaviour
 
     private void Awake()
     {
-        // シングルトン処理
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
+            if (Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
 
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
 
-        // 保存された音量設定を読み込む
         musicVolume = PlayerPrefs.GetFloat("MusicVolume", musicVolume);
         sfxVolume = PlayerPrefs.GetFloat("SFXVolume", sfxVolume);
 
@@ -47,6 +46,11 @@ public class SoundManager : MonoBehaviour
 
     private void Start()
     {
+        GameObject.Find("PlayButton")?.GetComponent<Button>()?.onClick.AddListener(() => PlayStartSFX());
+
+        foreach (var btn in GameObject.FindGameObjectsWithTag("SoundButton"))
+            btn.GetComponent<Button>().onClick.AddListener(PlayButtonSFX);
+
         // 現在のシーンに応じたBGMを再生
         Scene currentScene = SceneManager.GetActiveScene();
         PlayMusicForScene(currentScene.name);
@@ -65,6 +69,11 @@ public class SoundManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         PlayMusicForScene(scene.name);
+
+        GameObject.Find("PlayButton")?.GetComponent<Button>()?.onClick.AddListener(() => PlayStartSFX());
+
+        foreach (var btn in GameObject.FindGameObjectsWithTag("SoundButton"))
+            btn.GetComponent<Button>().onClick.AddListener(PlayButtonSFX);
     }
 
     // シーン読み込み時に適切なBGMを再生
@@ -113,6 +122,7 @@ public class SoundManager : MonoBehaviour
     public void PlayComboSFX() => PlaySFX(comboSfx);
     public void PlayCountdownSFX() => PlaySFX(countdownSfx);
     public void PlayCountdownOverSFX() => PlaySFX(countdownOverSfx);
+
 
     // BGM音量を設定して保存
     public void SetMusicVolume(float volume)
