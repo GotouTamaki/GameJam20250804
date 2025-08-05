@@ -22,6 +22,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip comboSfx;
     public AudioClip countdownSfx;
     public AudioClip countdownOverSfx;
+    public AudioClip receiptPrintSfx;
     public bool startButtonSfxHasPlayed = false;
 
     [Header("音量設定")]
@@ -53,8 +54,6 @@ public class SoundManager : MonoBehaviour
         // 現在のシーンに応じたBGMを再生
         Scene currentScene = SceneManager.GetActiveScene();
         PlayMusicForScene(currentScene.name);
-
-
     }
 
     private void OnEnable()
@@ -128,6 +127,7 @@ public class SoundManager : MonoBehaviour
     public void PlayComboSFX() => PlaySFX(comboSfx);
     public void PlayCountdownSFX() => PlaySFX(countdownSfx);
     public void PlayCountdownOverSFX() => PlaySFX(countdownOverSfx);
+    public void PlayReceiptSFX() => PlaySFX(receiptPrintSfx);
 
 
     // BGM音量を設定して保存

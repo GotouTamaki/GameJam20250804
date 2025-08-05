@@ -18,7 +18,7 @@ public class ReceiptAnimationController : MonoBehaviour
         rectMover.anchoredPosition = startAnchoredPos;
     }
 
-    private IEnumerator SlideToTarget()
+    public IEnumerator SlideToTarget()
     {
         float elapsed = 0f;
 
