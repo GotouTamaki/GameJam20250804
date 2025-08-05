@@ -14,6 +14,8 @@ public class SushiMove : MonoBehaviour
 
     private Vector3 moveVector = Vector3.zero;
 
+    public bool isCaught = false;
+
     void Start()
     {
         SetDirection(moveDirection); // ← ここで右に設定すれば右に動く
@@ -33,6 +35,7 @@ public class SushiMove : MonoBehaviour
 
 
         transform.Translate(moveVector * SushiMoveSpeed * Time.deltaTime);
+
     }
 
     public void SetDirection(MoveDirectionType direction)
