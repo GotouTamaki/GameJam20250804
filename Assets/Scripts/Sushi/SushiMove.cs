@@ -10,5 +10,10 @@ public class SushiMove : MonoBehaviour
     void Update()
     {
         transform.Translate(MoveDirection.normalized * SushiMoveSpeed *  Time.deltaTime); // 指定方向へ正規化された方向ベクトルで移動
+
+        if(transform.position.x < -5)
+        {
+            Destroy(gameObject);
+        }
     }
 }
