@@ -6,7 +6,7 @@ public class SushiSpawn : MonoBehaviour
     [SerializeField] GameObject sushiPrefab;
 
     // 指定方向で寿司を生成＆動かす
-    public void SpawnSushi(MoveDirection direction)
+    public void SpawnSushi(MoveDirectionType direction)
     {
         GameObject sushiObj = Instantiate(sushiPrefab, transform.position, Quaternion.identity);
         SushiMove move = sushiObj.GetComponent<SushiMove>();

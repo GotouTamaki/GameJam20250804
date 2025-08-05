@@ -6,11 +6,11 @@ public class SushiManager : MonoBehaviour
 
     public void MoveLeft()
     {
-        sushiMove.SetDirection(MoveDirection.Left);
+        sushiMove.SetDirection(MoveDirectionType.Left);
     }
 
     public void MoveRight()
     {
-        sushiMove.SetDirection(MoveDirection.Right);
+        sushiMove.SetDirection(MoveDirectionType.Right);
     }
 }
