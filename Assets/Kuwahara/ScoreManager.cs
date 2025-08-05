@@ -22,6 +22,9 @@ public class ScoreManager : MonoBehaviour
     [SerializeField, Range(0, 150)]private int _stomachFill = default;
     private float _hungerTimer = 0f;
 
+    public bool IsFinish => Money <= 100 || StomachFill >= _maxStomachFill;
+
+
     private void Start()
     {
         _stomachFillSlider.maxValue = (int)_maxStomachFill; // 満腹値を最大値に設定
