@@ -1,19 +1,37 @@
 ﻿using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
+public enum MoveDirection
+{
+    Left,Right
+}
 public class SushiMove : MonoBehaviour
 {
-    [SerializeField, Range(0.1f, 10)] public float SushiMoveSpeed = 3f; //移動速度(Inspector上で変更可)
-    [SerializeField] public Vector3 MoveDirection = Vector3.left; //寿司の進行方向(デフォルトは右から左へ)
+    [SerializeField, Range(0.1f, 10f)] public float SushiMoveSpeed = 3f;
+    private Vector3 moveVector = Vector3.zero;
 
-    // Update is called once per frame
+    void Start()
+    {
+        SetDirection(MoveDirection.Right); // ← ここで右に設定すれば右に動く
+    }
+
     void Update()
     {
-        transform.Translate(MoveDirection.normalized * SushiMoveSpeed *  Time.deltaTime); // 指定方向へ正規化された方向ベクトルで移動
+        transform.Translate(moveVector * SushiMoveSpeed * Time.deltaTime);
+    }
 
-        if(transform.position.x < -5)
+    public void SetDirection(MoveDirection direction)
+    {
+        switch (direction)
         {
-            Destroy(gameObject);
+            case MoveDirection.Left:
+                moveVector = Vector3.left;
+                Debug.Log("Direction set to LEFT");
+                break;
+            case MoveDirection.Right:
+                moveVector = Vector3.right;
+                Debug.Log("Direction set to RIGHT");
+                break;
         }
     }
 }

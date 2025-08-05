@@ -1,16 +1,16 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SushiManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] SushiMove sushiMove; // 対象のSushiMoveコンポーネントをInspectorでセット
+
+    public void MoveLeft()
     {
-        
+        sushiMove.SetDirection(MoveDirection.Left);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void MoveRight()
     {
-        
+        sushiMove.SetDirection(MoveDirection.Right);
     }
 }
