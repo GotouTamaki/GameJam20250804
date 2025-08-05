@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38b0aca18f77af04da3f9a7d03217296, type: 3}
   m_Name: Maguro
   m_EditorClassIdentifier: 
-  addScore: 10
-  price: 100
-  fillStomach: 10
+  sushiParameter:
+    addScore: 10
+    price: 100
+    fillStomach: 10
