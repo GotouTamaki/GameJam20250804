@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using TMPro;
 using System.Collections;
-using System.Security;
 
 public class UIManager : MonoBehaviour
 {
@@ -26,6 +25,9 @@ public class UIManager : MonoBehaviour
 
     private IEnumerator CountdownAndStartMusic()
     {
+        if (countdownText == null)
+            yield return null;
+
         string[] countdown = { "3", "2", "1", "Start" };
 
         SoundManager.Instance?.PlayCountdownSFX();

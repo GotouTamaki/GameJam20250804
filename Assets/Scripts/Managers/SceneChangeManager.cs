@@ -4,6 +4,16 @@ using System.Collections;
 
 public class SceneChangeManager : MonoBehaviour
 {
+    public GameObject soundManagerPrefab;
+
+    void Awake()
+    {
+        if (SoundManager.Instance == null)
+        {
+            Instantiate(soundManagerPrefab);
+        }
+    }
+
     public void GoToGame()
     {
         StartCoroutine(WaitUntilSFXHasFinished());

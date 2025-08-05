@@ -4,33 +4,39 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
-    [Header("初期所持金")]
-    private int _score = default;
+    [SerializeField, Header("初期スコア")] private int _initScore = default;
+    [SerializeField, Header("初期所持金")] private int _initMoney = default;
+    [SerializeField, Header("最大満腹値")] private float _maxStomachFill = 100f;
+
+    [Header("オブジェクトアタッチ用")]
+    [SerializeField] private TextMeshProUGUI _scoreText = default;
+    [SerializeField] private TextMeshProUGUI _moneyText = default;
+    [SerializeField] private Image _stomachFillImage = default;
+
+    private int _stomachFill = default;
+
     public int Score
     {
-        get { return _score; }
+        get { return _initScore; }
         set
         {
-            _score = value;
-            Debug.Log("Score updated: " + _score);
+            _initScore = value;
+            Debug.Log("Score updated: " + _initScore);
             UpdateScore();
         }
     }
 
-    [SerializeField] int _money = default;
     public int Money
     {
-        get { return _money; }
+        get { return _initMoney; }
         set
         {
-            _money = value;
-            Debug.Log("Money updated: " + _money);
+            _initMoney = value;
+            Debug.Log("Money updated: " + _initMoney);
             UpdateMoney();
         }
     }
 
-    [SerializeField] float _maxStomachFill = 100;
-    int _stomachFill = default;
     public int StomachFill
     {
         get { return _stomachFill; }
@@ -41,16 +47,21 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
+    public void AddScore(int addValue)
+    {
+        Score += addValue; // スコアを100増やす
+    }
 
-    [Header("オブジェクトアタッチ用")]
-    [SerializeField] private TextMeshProUGUI _scoreText = default;
-    [SerializeField] private TextMeshProUGUI _moneyText = default;
-    [SerializeField] private Image _stomachFillImage = default;
+    public void AddMoney(int addValue)
+    {
+        Money += addValue; // マネーを50減らす
+    }
 
     void UpdateScore()
     {
         _scoreText.text = IntToKanjiString(Score);
     }
+
     void UpdateMoney()
     {
         _moneyText.text = IntToKanjiString(Money);
@@ -65,7 +76,8 @@ public class ScoreManager : MonoBehaviour
     {
         string returnString = "";
         char[] _exchangeChar = value.ToString().ToCharArray();
-        for(int i = 0; i < _exchangeChar.Length; i++)
+
+        for (int i = 0; i < _exchangeChar.Length; i++)
         {
             switch (_exchangeChar[i])
             {
@@ -100,13 +112,14 @@ public class ScoreManager : MonoBehaviour
                     returnString += "九";
                     break;
             }
+
             returnString += "\n";
         }
 
         return returnString;
     }
 
-}   
-            
-        
-        
+}
+
+
+
