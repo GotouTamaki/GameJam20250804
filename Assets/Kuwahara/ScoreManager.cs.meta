@@ -1,2 +1,19 @@
 fileFormatVersion: 2
 guid: 35c06d9c986cf1a46b5eb830a828f2d8
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _scoreText: {instanceID: 0}
+  - _moneyText: {instanceID: 0}
+  - _stomachFillSlider: {instanceID: 0}
+  - _girlImage: {instanceID: 0}
+  - _girlImageFull: {fileID: 21300000, guid: 04bfde51f76cf444f8dc1246d31a446d, type: 3}
+  - _girlImageHungry: {fileID: 21300000, guid: 634e95c1412f21c48842a36ec1f05a72, type: 3}
+  - _girlImageNormal: {fileID: 21300000, guid: 0a9427462d6cb2248b00f79463428717, type: 3}
+  - _girlImagePerfentFull: {fileID: 21300000, guid: a4d6501f8b80a8f4bb20b781a81e71e3, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
