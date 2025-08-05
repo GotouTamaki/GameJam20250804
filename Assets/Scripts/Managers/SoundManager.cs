@@ -22,6 +22,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip comboSfx;
     public AudioClip countdownSfx;
     public AudioClip countdownOverSfx;
+    public bool startButtonSfxHasPlayed = false;
 
     [Header("音量設定")]
     [SerializeField, Range(0f, 1f)] private float sfxVolume = 0.3f;
@@ -39,21 +40,21 @@ public class SoundManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
 
         musicVolume = PlayerPrefs.GetFloat("MusicVolume", musicVolume);
-        sfxVolume = PlayerPrefs.GetFloat("SFXVolume", sfxVolume);
+        sfxVolume = 0.5f;
 
         ApplyVolumes();
     }
 
     private void Start()
     {
-        GameObject.Find("PlayButton")?.GetComponent<Button>()?.onClick.AddListener(() => PlayStartSFX());
-
         foreach (var btn in GameObject.FindGameObjectsWithTag("SoundButton"))
             btn.GetComponent<Button>().onClick.AddListener(PlayButtonSFX);
 
         // 現在のシーンに応じたBGMを再生
         Scene currentScene = SceneManager.GetActiveScene();
         PlayMusicForScene(currentScene.name);
+
+
     }
 
     private void OnEnable()
@@ -69,8 +70,6 @@ public class SoundManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         PlayMusicForScene(scene.name);
-
-        GameObject.Find("PlayButton")?.GetComponent<Button>()?.onClick.AddListener(() => PlayStartSFX());
 
         foreach (var btn in GameObject.FindGameObjectsWithTag("SoundButton"))
             btn.GetComponent<Button>().onClick.AddListener(PlayButtonSFX);
@@ -116,7 +115,14 @@ public class SoundManager : MonoBehaviour
     }
 
     // 特定の効果音を再生する便利メソッド
-    public void PlayStartSFX() => PlaySFX(startButtonSfx);
+    public void PlayStartSFX()
+    {
+        if (startButtonSfxHasPlayed) return;
+
+        PlaySFX(startButtonSfx);
+        startButtonSfxHasPlayed = true;
+    }
+
     public void PlayButtonSFX() => PlaySFX(buttonSfx);
     public void PlayShootSFX() => PlaySFX(shootSfx);
     public void PlayComboSFX() => PlaySFX(comboSfx);
@@ -138,23 +144,9 @@ public class SoundManager : MonoBehaviour
         return musicVolume;
     }
 
-    // 効果音音量を設定して保存
-    public void SetSFXVolume(float volume)
-    {
-        sfxVolume = Mathf.Clamp01(volume);
-        sfxSource.volume = sfxVolume;
-        PlayerPrefs.SetFloat("SFXVolume", sfxVolume);
-        PlayerPrefs.Save();
-    }
-    public float GetSFXVolume()
-    {
-        return sfxVolume;
-    }
-
     // 音量設定をオーディオソースに適用
     private void ApplyVolumes()
     {
         musicSource.volume = musicVolume;
-        sfxSource.volume = sfxVolume;
     }
 }

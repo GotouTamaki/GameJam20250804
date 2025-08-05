@@ -45,7 +45,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -315,4 +315,4 @@ MonoBehaviour:
   countdownSfx: {fileID: 8300000, guid: d190522843fafa34e929d5e08235853c, type: 3}
   countdownOverSfx: {fileID: 8300000, guid: b86d7eb6d7f5ba144939e42882d96d90, type: 3}
   sfxVolume: 1
-  musicVolume: 1
+  musicVolume: 0
