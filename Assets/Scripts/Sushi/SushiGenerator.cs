@@ -25,7 +25,8 @@ public class SushiGenerator : MonoBehaviour
             if (_leftGenerateTransforms.Length <= 0 || _generatePrefabs.Length <= 0 || _generateWeights.Length <= 0) return;
 
             Vector3 generatePosition = Vector3.zero;
-            int randamLR = Random.Range(0, 1);
+            //int randamLR = Random.Range(0, 1);
+            int randamLR = 1;
 
             if (randamLR is 0)
             {
@@ -33,7 +34,7 @@ public class SushiGenerator : MonoBehaviour
             }
             else
             {
-                generatePosition = _rightGenerateTransforms[Random.Range(0, _rightGenerateTransforms.Length - 1)].position;
+                generatePosition = _rightGenerateTransforms[Random.Range(0, _rightGenerateTransforms.Length )].position;
             }
 
             int num = Choose(_generateWeights);

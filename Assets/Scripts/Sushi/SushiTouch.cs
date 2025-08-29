@@ -1,10 +1,9 @@
 ﻿using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(CapsuleCollider2D))]
-public class SushiTouch : MonoBehaviour, IPointerClickHandler
+public class SushiTouch : MonoBehaviour
 {
     [SerializeField] private Sprite _clickSprite;
     [SerializeField] private SushiParameterData _data;
@@ -15,20 +14,24 @@ public class SushiTouch : MonoBehaviour, IPointerClickHandler
     private SushiParameter _sushiParameter;
 
     private ScoreManager _scoreManager;
+    private SushiMove _sushiMove;
+
+    private bool _isEnter = false;
 
     private void OnEnable()
     {
         _scoreManager = FindAnyObjectByType<ScoreManager>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _sushiParameter = _data.sushiParameter;
-        _textMeshPro.text = IntToKanjiString(_sushiParameter.price);
+        _textMeshPro.text = IntToKanjiString(_sushiParameter.Price);
+        _sushiMove = FindAnyObjectByType<SushiMove>();
     }
 
     public void PriceDown()
     {
         if (_sushiParameter is null)
         {
-            _sushiParameter.price = 0;
+            _sushiParameter.SetPrice(0);
         }
     }
 
@@ -79,18 +82,30 @@ public class SushiTouch : MonoBehaviour, IPointerClickHandler
         return returnString;
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnMouseDown()
     {
-        Debug.Log("ﾐ゜ｯ");
+        //Debug.Log("ﾐ゜ｯ");
         SoundManager.Instance.PlayShootSFX();
-        _scoreManager.AddScore(_sushiParameter.addScore);
-        _scoreManager.AddMoney(-_sushiParameter.price);
+        _scoreManager.AddScore(_sushiParameter.AddScore);
+        _scoreManager.AddMoney(-_sushiParameter.Price);
+        _scoreManager.AddStomachFill(_sushiParameter.FillStomach);
+        _sushiMove.SetDirection(MoveDirectionType.Stop);
 
         if (_clickSprite is not null)
         {
             _spriteRenderer.sprite = _clickSprite;
         }
 
-        Destroy(gameObject, 0.5f);
+        Destroy(gameObject);
     }
+
+    //public void OnPointerEnter(PointerEventData eventData)
+    //{
+    //    _isEnter = true;
+    //}
+
+    //public void OnPointerExit(PointerEventData eventData)
+    //{
+    //    _isEnter = false;
+    //}
 }

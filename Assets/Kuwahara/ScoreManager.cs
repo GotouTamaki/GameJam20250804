@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class ScoreManager : MonoBehaviour
     [Header("オブジェクトアタッチ用")]
     [SerializeField] private TextMeshProUGUI _scoreText = default;
     [SerializeField] private TextMeshProUGUI _moneyText = default;
+    [SerializeField] private TextMeshProUGUI _receiptScoreText = default;
+    [SerializeField] private TextMeshProUGUI _receiptMoneyText = default;
     [SerializeField] private Slider _stomachFillSlider = default;
     [SerializeField] private Image _girlImage = default;
     [SerializeField] private Sprite _girlImageFull;
@@ -22,6 +25,9 @@ public class ScoreManager : MonoBehaviour
     [SerializeField, Range(0, 150)]private int _stomachFill = default;
     private float _hungerTimer = 0f;
 
+    private ReceiptAnimationController _receiptAnimationController = null;
+    private bool _isResult = false;
+
     public bool IsFinish => Money <= 100 || StomachFill >= _maxStomachFill;
 
 
@@ -32,6 +38,9 @@ public class ScoreManager : MonoBehaviour
         UpdateScore();
         UpdateMoney();
         UpdateStomachFill();
+        _isResult = false;
+
+        _receiptAnimationController = FindAnyObjectByType<ReceiptAnimationController>();
     }
 
     public int Score
@@ -97,6 +106,15 @@ public class ScoreManager : MonoBehaviour
             {
                 StomachFill = 0; // 満腹値の下限を設定
             }
+        }
+
+        if (IsFinish && !_isResult)
+        {
+            SoundManager.Instance.PlayReceiptSFX();
+            _receiptScoreText.text = Score.ToString();
+            _receiptMoneyText.text = Money.ToString();
+            StartCoroutine(_receiptAnimationController.SlideToTarget());
+            _isResult = true;
         }
     }
 

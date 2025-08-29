@@ -47,6 +47,7 @@ public class UIManager : MonoBehaviour
         }
 
         countdownText.text = "";
+        countdownText.gameObject.SetActive(false);
 
         if (SoundManager.Instance != null) // Changes music on start
             SoundManager.Instance.PlayMusic(SoundManager.Instance.gameBgm);

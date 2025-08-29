@@ -48,6 +48,10 @@ public class SushiMove : MonoBehaviour
                 moveVector = Vector3.right;
                 Debug.Log("Direction set to RIGHT");
                 break;
+            case MoveDirectionType.Stop:
+                moveVector = Vector3.zero;
+                Debug.Log("Direction set to RIGHT");
+                break;
         }
     }
 }

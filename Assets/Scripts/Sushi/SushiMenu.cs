@@ -1,61 +1,56 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public enum Sushi //列挙型で寿司の種類を定義
-{
-    a, b, c, d, e, f, g, h, i, j,
-}
-
 public class SushiMenu : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        List<Sushi> allSushis = new List<Sushi>((Sushi[])System.Enum.GetValues(typeof(Sushi))); //全ての寿司をリストに変換
+        List<SushiType> allSushis = new List<SushiType>((SushiType[])System.Enum.GetValues(typeof(SushiType))); //全ての寿司をリストに変換
         Shuffle(allSushis);                                                                     //シャッフルし、順番をランダムに
-        List<Sushi> selected = allSushis.GetRange(0, 4);                                        //最初の４つを選択
+        List<SushiType> selected = allSushis.GetRange(0, 4);                                        //最初の４つを選択
 
-        foreach (Sushi s in selected)                                                           //選ばれた寿司を１つずつ処理
+        foreach (SushiType s in selected)                                                           //選ばれた寿司を１つずつ処理
         {
             switch (s)                                                                          //寿司の種類ごとに分岐
             {
-                case Sushi.a:                                                                   
+                case SushiType.Squid:
                     Debug.Log("aが選ばれた");
                     break;
 
-                case Sushi.b:
+                case SushiType.Shrimp:
                     Debug.Log("bが選ばれた");
                     break;
 
-                case Sushi.c:
+                case SushiType.Tuna:
                     Debug.Log("cが選ばれた");
                     break;
 
-                case Sushi.d:
+                case SushiType.Parfait:
                     Debug.Log("dが選ばれた");
                     break;
 
-                case Sushi.e:
+                case SushiType.Omelet:
                     Debug.Log("eが選ばれた");
                     break;
 
-                case Sushi.f:
+                case SushiType.Bonito:
                     Debug.Log("fが選ばれた");
                     break;
 
-                case Sushi.g:
+                case SushiType.SalmonRoe:
                     Debug.Log("gが選ばれた");
                     break;
 
-                case Sushi.h:
+                case SushiType.Kappamaki:
                     Debug.Log("hが選ばれた");
                     break;
 
-                case Sushi.i:
+                case SushiType.Octopus:
                     Debug.Log("iが選ばれた");
                     break;
 
-                case Sushi.j:
+                case SushiType.Negitoro:
                     Debug.Log("jが選ばれた");
                     break;
             }
