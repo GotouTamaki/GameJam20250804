@@ -18,6 +18,8 @@ public class SushiTouch : MonoBehaviour
 
     private bool _isEnter = false;
 
+    public SushiParameter SushiParameter => _sushiParameter;
+
     private void OnEnable()
     {
         _scoreManager = FindAnyObjectByType<ScoreManager>();
