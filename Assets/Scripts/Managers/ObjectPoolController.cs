@@ -13,7 +13,7 @@ public class ObjectPoolController : MonoBehaviour
 
     [SerializeField] private SushiPrefabData[] sushiPrefabs;
 
-    // 種類ごとのオブジェクトプール辞書
+    // 寿司の種類ごとのオブジェクトプール用Dictionary
     private Dictionary<SushiType, Queue<GameObject>> poolDictionary;
 
     private void Awake()
