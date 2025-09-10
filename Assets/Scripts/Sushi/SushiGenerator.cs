@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class SushiGenerator : MonoBehaviour
 {
     [SerializeField] private Transform[] _leftGenerateTransforms;
     [SerializeField] private Transform[] _rightGenerateTransforms;
-    [SerializeField] private GameObject[] _generatePrefabs;
+    [SerializeField] private SushiTouch[] _generatePrefabs;
     [SerializeField] private int[] _generateWeights;
     [SerializeField] private float _initInterval = 0.5f;
     [SerializeField] private float _minLimmitInterval = 0.1f;
@@ -12,10 +13,31 @@ public class SushiGenerator : MonoBehaviour
     private float _currentInterval = 0.5f;
     private float _timer = 0;
 
+    // 種類ごとのプールを Dictionary で管理
+    private Dictionary<SushiType, ObjectPool<SushiTouch>> _sushiPools;
+
+    public Dictionary<SushiType, ObjectPool<SushiTouch>> GetObjectPools => _sushiPools;
+
     void Start()
     {
-        _timer = 0;
-        _currentInterval = _initInterval;
+        _sushiPools = new Dictionary<SushiType, ObjectPool<SushiTouch>>();
+
+        foreach (var prefab in _generatePrefabs)
+        {
+            SushiType type = prefab.SushiParameter.Type; // ← SushiMove 内で SushiParameter を持っている想定
+
+            _sushiPools[type] = new ObjectPool<SushiTouch>(
+                createFunc: () =>
+                {
+                    SushiTouch obj = Instantiate(prefab);
+                    obj.gameObject.SetActive(false);
+                    return obj;
+                },
+                onGet: (obj) => obj.gameObject.SetActive(true),
+                onRelease: (obj) => obj.gameObject.SetActive(false),
+                initialSize: 5
+            );
+        }
     }
 
     void Update()
@@ -25,27 +47,28 @@ public class SushiGenerator : MonoBehaviour
             if (_leftGenerateTransforms.Length <= 0 || _generatePrefabs.Length <= 0 || _generateWeights.Length <= 0) return;
 
             Vector3 generatePosition = Vector3.zero;
-            //int randamLR = Random.Range(0, 1);
-            int randamLR = 1;
+            int randamLR = Random.Range(0, 2); // 0: left, 1: right
 
-            if (randamLR is 0)
+            if (randamLR == 0)
             {
-                generatePosition = _leftGenerateTransforms[Random.Range(0, _leftGenerateTransforms.Length - 1)].position;
+                generatePosition = _leftGenerateTransforms[Random.Range(0, _leftGenerateTransforms.Length)].position;
             }
             else
             {
-                generatePosition = _rightGenerateTransforms[Random.Range(0, _rightGenerateTransforms.Length )].position;
+                generatePosition = _rightGenerateTransforms[Random.Range(0, _rightGenerateTransforms.Length)].position;
             }
 
             int num = Choose(_generateWeights);
-            GameObject prefab = Instantiate(_generatePrefabs[num], generatePosition, _generatePrefabs[num].transform.rotation);
-            SushiMove sushiMove = prefab.GetComponent<SushiMove>();
-            sushiMove.SetDirection(MoveDirectionType.Left);
+            SushiTouch sushiTouch = _sushiPools[(SushiType)num].Get();
+            SushiMove sushiMove = sushiTouch.SushiMove;
+
+            sushiMove.gameObject.transform.SetPositionAndRotation(generatePosition, _generatePrefabs[num].transform.rotation);
+            sushiMove.SetDirection(randamLR == 0 ? MoveDirectionType.Right : MoveDirectionType.Left);
+
             _timer = 0;
         }
 
         _timer += Time.deltaTime;
-
     }
 
     /// <summary>抽選メソッド</summary>

@@ -1860,6 +1860,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: SushiGenerator
       objectReference: {fileID: 0}
+    - target: {fileID: 5141888971962772405, guid: 1b533d4fdc5a81b47be1d2c74cc18a57, type: 3}
+      propertyPath: _generatePrefabs.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5141888971962772405, guid: 1b533d4fdc5a81b47be1d2c74cc18a57, type: 3}
+      propertyPath: '_generatePrefabs.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2867307859396629893, guid: 04ce1964afa1b414c9616e204fad152a, type: 3}
+    - target: {fileID: 5141888971962772405, guid: 1b533d4fdc5a81b47be1d2c74cc18a57, type: 3}
+      propertyPath: '_generatePrefabs.Array.data[1]'
+      value: 
+      objectReference: {fileID: 4270065497223937283, guid: 6f92f1b555d569e4598219947414418d, type: 3}
+    - target: {fileID: 5141888971962772405, guid: 1b533d4fdc5a81b47be1d2c74cc18a57, type: 3}
+      propertyPath: '_generatePrefabs.Array.data[2]'
+      value: 
+      objectReference: {fileID: 1171712466997859396, guid: 1ea39fb113bcfef47adeebb342d5f3cb, type: 3}
+    - target: {fileID: 5141888971962772405, guid: 1b533d4fdc5a81b47be1d2c74cc18a57, type: 3}
+      propertyPath: '_generatePrefabs.Array.data[3]'
+      value: 
+      objectReference: {fileID: 1028439417624521888, guid: b87fae6c3f6ba7a45b33b18e75bad818, type: 3}
+    - target: {fileID: 5141888971962772405, guid: 1b533d4fdc5a81b47be1d2c74cc18a57, type: 3}
+      propertyPath: '_generatePrefabs.Array.data[4]'
+      value: 
+      objectReference: {fileID: -7883916749091148867, guid: 0ced5bc3b0e660947bb120e6d44043c6, type: 3}
+    - target: {fileID: 5141888971962772405, guid: 1b533d4fdc5a81b47be1d2c74cc18a57, type: 3}
+      propertyPath: '_generatePrefabs.Array.data[5]'
+      value: 
+      objectReference: {fileID: 6889563870177998672, guid: ef2aec393e1db1e4d95ae1d82fc27107, type: 3}
     - target: {fileID: 8755173653766428604, guid: 1b533d4fdc5a81b47be1d2c74cc18a57, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.02
@@ -1900,7 +1928,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7075075361184568861, guid: 1b533d4fdc5a81b47be1d2c74cc18a57, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

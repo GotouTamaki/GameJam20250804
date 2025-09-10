@@ -14,15 +14,18 @@ public class SushiTouch : MonoBehaviour
     private SushiParameter _sushiParameter;
 
     private ScoreManager _scoreManager;
+    private SushiManager _sushiManager;
     private SushiMove _sushiMove;
 
     private bool _isEnter = false;
 
     public SushiParameter SushiParameter => _sushiParameter;
+    public SushiMove SushiMove => _sushiMove;
 
     private void OnEnable()
     {
         _scoreManager = FindAnyObjectByType<ScoreManager>();
+        _sushiManager = FindAnyObjectByType<SushiManager>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _sushiParameter = _data.sushiParameter;
         _textMeshPro.text = IntToKanjiString(_sushiParameter.Price);
