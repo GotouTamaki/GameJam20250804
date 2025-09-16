@@ -9,6 +9,7 @@ public class SushiGenerator : MonoBehaviour
     [SerializeField] private int[] _generateWeights;
     [SerializeField] private float _initInterval = 0.5f;
     [SerializeField] private float _minLimmitInterval = 0.1f;
+    [SerializeField] private float _lifeTime = 5f;
 
     private float _currentInterval = 0.5f;
     private float _timer = 0;
@@ -59,7 +60,7 @@ public class SushiGenerator : MonoBehaviour
             }
 
             int num = Choose(_generateWeights);
-            SushiTouch sushiTouch = _sushiPools[(SushiType)num].Get();
+            SushiTouch sushiTouch = _sushiPools[(SushiType)num].Get(_lifeTime);
             SushiMove sushiMove = sushiTouch.SushiMove;
 
             sushiMove.gameObject.transform.SetPositionAndRotation(generatePosition, _generatePrefabs[num].transform.rotation);

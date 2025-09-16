@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 
 public class ObjectPool<T>
 {
@@ -20,16 +21,38 @@ public class ObjectPool<T>
         }
     }
 
-    public T Get()
+    /// <summary>
+    /// オブジェクトを取得
+    /// </summary>
+    /// <param name="autoReleaseDelay">自動でReleaseするまでの秒数（<=0 の場合は自動リリースなし）</param>
+    public T Get(float autoReleaseDelay = 0f)
     {
         var obj = pool.Count > 0 ? pool.Dequeue() : createFunc();
         onGet?.Invoke(obj);
+
+        if (autoReleaseDelay > 0f)
+        {
+            AutoReleaseAsync(obj, autoReleaseDelay).Forget();
+        }
+
         return obj;
     }
 
+    /// <summary>
+    /// オブジェクトを手動で返却
+    /// </summary>
     public void Release(T obj)
     {
         onRelease?.Invoke(obj);
         pool.Enqueue(obj);
+    }
+
+    /// <summary>
+    /// 一定時間後に自動でリリースする処理
+    /// </summary>
+    private async UniTaskVoid AutoReleaseAsync(T obj, float delaySeconds)
+    {
+        await UniTask.Delay(TimeSpan.FromSeconds(delaySeconds));
+        Release(obj);
     }
 }
