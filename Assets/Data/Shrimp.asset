@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 38b0aca18f77af04da3f9a7d03217296, type: 3}
-  m_Name: Maguro
+  m_Name: Shrimp
   m_EditorClassIdentifier: 
   sushiParameter:
-    type: 2
+    type: 1
     addScore: 10
     price: 100
     fillStomach: 10
