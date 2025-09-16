@@ -250,9 +250,9 @@ GameObject:
   - component: {fileID: 8300659042247194792}
   - component: {fileID: 4986965616451487496}
   - component: {fileID: 2777264748830375314}
-  - component: {fileID: 4270065497223937283}
+  - component: {fileID: 1171712466997859396}
   m_Layer: 6
-  m_Name: Sushi_Maguro 1
+  m_Name: Tuna
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -318,7 +318,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 4c943a5566f2e784b9e81123563201c7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a89689c272ab6ea4596bd3a5983766df, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -341,7 +341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3529d4050ecdee40bdf8f4263595560, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _clickSprite: {fileID: 21300000, guid: 889e5afb6baef0540b0b62d94cea636f, type: 3}
+  _clickSprite: {fileID: 21300000, guid: a622a2a9894295646b4b3eab2f1a9727, type: 3}
   _data: {fileID: 11400000, guid: f5e9ec460067bc048ad715377257f353, type: 2}
   _textMeshPro: {fileID: 4322833692654267966}
   _targetLayerMask:
@@ -385,7 +385,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.31}
   m_Size: {x: 1.24, y: 0.82}
   m_Direction: 1
---- !u!114 &4270065497223937283
+--- !u!114 &1171712466997859396
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

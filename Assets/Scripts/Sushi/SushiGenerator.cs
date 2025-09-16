@@ -48,23 +48,25 @@ public class SushiGenerator : MonoBehaviour
             if (_leftGenerateTransforms.Length <= 0 || _generatePrefabs.Length <= 0 || _generateWeights.Length <= 0) return;
 
             Vector3 generatePosition = Vector3.zero;
-            int randamLR = Random.Range(0, 2); // 0: left, 1: right
+            //int randamLR = Random.Range(0, 2); // 0: left, 1: right
 
-            if (randamLR == 0)
-            {
-                generatePosition = _leftGenerateTransforms[Random.Range(0, _leftGenerateTransforms.Length)].position;
-            }
-            else
-            {
-                generatePosition = _rightGenerateTransforms[Random.Range(0, _rightGenerateTransforms.Length)].position;
-            }
+            //if (randamLR == 0)
+            //{
+            //    generatePosition = _leftGenerateTransforms[Random.Range(0, _leftGenerateTransforms.Length)].position;
+            //}
+            //else
+            //{
+            generatePosition = _rightGenerateTransforms[Random.Range(0, _rightGenerateTransforms.Length)].position;
+            //}
 
             int num = Choose(_generateWeights);
-            SushiTouch sushiTouch = _sushiPools[(SushiType)num].Get(_lifeTime);
+            SushiType type = _generatePrefabs[num].SushiParameter.Type;
+            SushiTouch sushiTouch = _sushiPools[type].Get(_lifeTime);
             SushiMove sushiMove = sushiTouch.SushiMove;
 
             sushiMove.gameObject.transform.SetPositionAndRotation(generatePosition, _generatePrefabs[num].transform.rotation);
-            sushiMove.SetDirection(randamLR == 0 ? MoveDirectionType.Right : MoveDirectionType.Left);
+            //sushiMove.SetDirection(randamLR == 0 ? MoveDirectionType.Right : MoveDirectionType.Left);
+            sushiMove.SetDirection(MoveDirectionType.Left);
 
             _timer = 0;
         }

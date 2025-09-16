@@ -100,8 +100,6 @@ public class SushiTouch : MonoBehaviour
         {
             _spriteRenderer.sprite = _clickSprite;
         }
-
-        Destroy(gameObject);
     }
 
     //public void OnPointerEnter(PointerEventData eventData)
