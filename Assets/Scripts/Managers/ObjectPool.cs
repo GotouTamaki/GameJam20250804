@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 
+[Serializable]
 public class ObjectPool<T>
 {
     private readonly Queue<T> pool = new Queue<T>();
+    private readonly HashSet<T> activeObjects = new HashSet<T>();
     private readonly Func<T> createFunc;
     private readonly Action<T> onGet;
     private readonly Action<T> onRelease;
+
+    // IEnumerable<T>型で公開するとEnqueue/Dequeueできない
+    public IEnumerable<T> Pool => pool;
 
     public ObjectPool(Func<T> createFunc, Action<T> onGet = null, Action<T> onRelease = null, int initialSize = 0)
     {
@@ -27,7 +32,18 @@ public class ObjectPool<T>
     /// <param name="autoReleaseDelay">自動でReleaseするまでの秒数（<=0 の場合は自動リリースなし）</param>
     public T Get(float autoReleaseDelay = 0f)
     {
-        var obj = pool.Count > 0 ? pool.Dequeue() : createFunc();
+        T obj = default;
+
+        if (pool.Count > 0)
+        {
+            obj = pool.Dequeue();
+        }
+        else
+        {
+            obj = createFunc();
+        }
+
+        activeObjects.Add(obj);
         onGet?.Invoke(obj);
 
         if (autoReleaseDelay > 0f)
@@ -43,6 +59,9 @@ public class ObjectPool<T>
     /// </summary>
     public void Release(T obj)
     {
+        if (!activeObjects.Contains(obj)) return;
+
+        activeObjects.Remove(obj);
         onRelease?.Invoke(obj);
         pool.Enqueue(obj);
     }

@@ -23,11 +23,24 @@ public class SushiGenerator : MonoBehaviour
     {
         _sushiPools = new Dictionary<SushiType, ObjectPool<SushiTouch>>();
 
+
         foreach (var prefab in _generatePrefabs)
         {
-            SushiType type = prefab.SushiParameter.Type; // ← SushiMove 内で SushiParameter を持っている想定
+            SushiType type = prefab.SushiParameterData.sushiParameter.Type; // ← SushiMove 内で SushiParameter を持っている想定
+            Debug.Log($"[Pool Init] Register {type} from prefab {prefab.name}");
 
-            _sushiPools[type] = new ObjectPool<SushiTouch>(
+            // プレハブ名と SushiType の不一致チェック
+            if (!prefab.name.Contains(type.ToString()))
+            {
+                Debug.LogWarning($"[Pool Init] Prefab {prefab.name} の Type が {type} になっています。設定ミスの可能性があります！");
+            }
+
+            //if (_sushiPools.ContainsKey(type))
+            //{
+            //    Debug.LogWarning($"[Pool Init] {type} はすでに登録されています。上書きします。");
+            //}
+
+            var pool = new ObjectPool<SushiTouch>(
                 createFunc: () =>
                 {
                     SushiTouch obj = Instantiate(prefab);
@@ -35,10 +48,23 @@ public class SushiGenerator : MonoBehaviour
                     return obj;
                 },
                 onGet: (obj) => obj.gameObject.SetActive(true),
-                onRelease: (obj) => obj.gameObject.SetActive(false),
+                onRelease: (obj) =>
+                {
+                    obj.SushiMove?.SetDirection(MoveDirectionType.Stop);
+                    obj.gameObject.SetActive(false);
+                },
                 initialSize: 5
             );
+
+            // 先に Dictionary に登録してから明示的に初期化
+            _sushiPools[type] = pool;
+
+            foreach (SushiTouch obj in _sushiPools[type].Pool)
+            {
+                obj.SetPool(pool);
+            }
         }
+
     }
 
     void Update()
@@ -57,16 +83,33 @@ public class SushiGenerator : MonoBehaviour
             //else
             //{
             generatePosition = _rightGenerateTransforms[Random.Range(0, _rightGenerateTransforms.Length)].position;
+            //Debug.Log($"Generate Podition : {generatePosition}");
             //}
 
             int num = Choose(_generateWeights);
-            SushiType type = _generatePrefabs[num].SushiParameter.Type;
-            SushiTouch sushiTouch = _sushiPools[type].Get(_lifeTime);
-            SushiMove sushiMove = sushiTouch.SushiMove;
+            SushiType type = _generatePrefabs[num].SushiParameterData.sushiParameter.Type;
 
-            sushiMove.gameObject.transform.SetPositionAndRotation(generatePosition, _generatePrefabs[num].transform.rotation);
-            //sushiMove.SetDirection(randamLR == 0 ? MoveDirectionType.Right : MoveDirectionType.Left);
-            sushiMove.SetDirection(MoveDirectionType.Left);
+            if (!_sushiPools.ContainsKey(type))
+            {
+                Debug.LogError($"[SushiGenerator] {type} が _sushiPools に存在しません！ " +
+                               $"num={num}, prefab={_generatePrefabs[num].name}");
+                return;
+            }
+
+            if (_sushiPools.ContainsKey(type))
+            {
+                SushiTouch sushiTouch = _sushiPools[type].Get(_lifeTime);
+                Debug.Log($"Choose Num : {num}\nSushi Type {type}");
+                SushiMove sushiMove = sushiTouch.SushiMove;
+                sushiMove.gameObject.transform.position = generatePosition;
+                Debug.Log($"Change Position : {sushiMove.gameObject.transform.position}");
+                //sushiMove.SetDirection(randamLR == 0 ? MoveDirectionType.Right : MoveDirectionType.Left);
+                sushiMove.SetDirection(MoveDirectionType.Left);
+            }
+            else
+            {
+                Debug.LogWarning($"Choose not registration type : {type} !!\nMust registration that type object!!");
+            }
 
             _timer = 0;
         }

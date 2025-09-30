@@ -1,10 +1,12 @@
-﻿using TMPro;
+﻿using Cysharp.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(CapsuleCollider2D))]
 public class SushiTouch : MonoBehaviour
 {
+
     [SerializeField] private Sprite _clickSprite;
     [SerializeField] private SushiParameterData _data;
     [SerializeField] private TMP_Text _textMeshPro;
@@ -12,15 +14,22 @@ public class SushiTouch : MonoBehaviour
 
     private SpriteRenderer _spriteRenderer;
     private SushiParameter _sushiParameter;
-
     private ScoreManager _scoreManager;
     private SushiManager _sushiManager;
     private SushiMove _sushiMove;
+    // 自分が格納されているプール
+    private ObjectPool<SushiTouch> _pool;
 
     private bool _isEnter = false;
 
-    public SushiParameter SushiParameter => _sushiParameter;
+    //public SushiParameter SushiParameter => _sushiParameter;
+    public SushiParameterData SushiParameterData => _data;
     public SushiMove SushiMove => _sushiMove;
+
+    public void SetPool(ObjectPool<SushiTouch> pool)
+    {
+        _pool = pool;
+    }
 
     private void OnEnable()
     {
@@ -29,7 +38,12 @@ public class SushiTouch : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _sushiParameter = _data.sushiParameter;
         _textMeshPro.text = IntToKanjiString(_sushiParameter.Price);
-        _sushiMove = FindAnyObjectByType<SushiMove>();
+
+        _sushiMove = GetComponent<SushiMove>();
+        if (_sushiMove == null)
+        {
+            _sushiMove = GetComponentInChildren<SushiMove>();
+        }
     }
 
     public void PriceDown()
@@ -100,6 +114,16 @@ public class SushiTouch : MonoBehaviour
         {
             _spriteRenderer.sprite = _clickSprite;
         }
+
+        ReturnToPoolWithDelay().Forget();
+    }
+
+    private async UniTaskVoid ReturnToPoolWithDelay()
+    {
+        await UniTask.Delay(System.TimeSpan.FromSeconds(_destroyDelayTime));
+
+        // プールに返却
+        _pool?.Release(this);
     }
 
     //public void OnPointerEnter(PointerEventData eventData)
