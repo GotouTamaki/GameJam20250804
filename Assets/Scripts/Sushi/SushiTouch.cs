@@ -21,6 +21,7 @@ public class SushiTouch : MonoBehaviour
     private ObjectPool<SushiTouch> _pool;
 
     private bool _isEnter = false;
+    private bool _isClick = false;
 
     //public SushiParameter SushiParameter => _sushiParameter;
     public SushiParameterData SushiParameterData => _data;
@@ -38,6 +39,7 @@ public class SushiTouch : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _sushiParameter = _data.sushiParameter;
         _textMeshPro.text = IntToKanjiString(_sushiParameter.Price);
+        _isClick = false;
 
         _sushiMove = GetComponent<SushiMove>();
         if (_sushiMove == null)
@@ -103,19 +105,23 @@ public class SushiTouch : MonoBehaviour
 
     public void OnMouseDown()
     {
-        //Debug.Log("ﾐ゜ｯ");
-        SoundManager.Instance.PlayShootSFX();
-        _scoreManager.AddScore(_sushiParameter.AddScore);
-        _scoreManager.AddMoney(-_sushiParameter.Price);
-        _scoreManager.AddStomachFill(_sushiParameter.FillStomach);
-        _sushiMove.SetDirection(MoveDirectionType.Stop);
-
-        if (_clickSprite is not null)
+        if (!_isClick)
         {
-            _spriteRenderer.sprite = _clickSprite;
-        }
+            //Debug.Log("ﾐ゜ｯ");
+            SoundManager.Instance.PlayShootSFX();
+            _scoreManager.AddScore(_sushiParameter.AddScore);
+            _scoreManager.AddMoney(-_sushiParameter.Price);
+            _scoreManager.AddStomachFill(_sushiParameter.FillStomach);
+            _sushiMove.SetDirection(MoveDirectionType.Stop);
 
-        ReturnToPoolWithDelay().Forget();
+            if (_clickSprite is not null)
+            {
+                _spriteRenderer.sprite = _clickSprite;
+            }
+
+            ReturnToPoolWithDelay().Forget();
+            _isClick = true;
+        }
     }
 
     private async UniTaskVoid ReturnToPoolWithDelay()

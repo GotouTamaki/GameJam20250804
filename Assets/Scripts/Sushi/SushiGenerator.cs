@@ -117,6 +117,18 @@ public class SushiGenerator : MonoBehaviour
         _timer += Time.deltaTime;
     }
 
+    private void OnDestroy()
+    {
+        // シーン遷移時にプールをクリーンアップ
+        if (_sushiPools != null)
+        {
+            foreach (var pool in _sushiPools.Values)
+            {
+                pool.Cleanup(); // 方法1のCleanup()メソッドが必要
+            }
+        }
+    }
+
     /// <summary>抽選メソッド</summary>
     public int Choose(int[] weight)
     {

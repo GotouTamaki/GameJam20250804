@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 
 [Serializable]
@@ -7,6 +8,7 @@ public class ObjectPool<T>
 {
     private readonly Queue<T> pool = new Queue<T>();
     private readonly HashSet<T> activeObjects = new HashSet<T>();
+    private readonly Dictionary<T, CancellationTokenSource> activeTokens = new Dictionary<T, CancellationTokenSource>();
     private readonly Func<T> createFunc;
     private readonly Action<T> onGet;
     private readonly Action<T> onRelease;
@@ -48,6 +50,8 @@ public class ObjectPool<T>
 
         if (autoReleaseDelay > 0f)
         {
+            var cts = new CancellationTokenSource();
+            activeTokens[obj] = cts;
             AutoReleaseAsync(obj, autoReleaseDelay).Forget();
         }
 
@@ -61,6 +65,14 @@ public class ObjectPool<T>
     {
         if (!activeObjects.Contains(obj)) return;
 
+        // キャンセルトークンをキャンセル
+        if (activeTokens.TryGetValue(obj, out var cts))
+        {
+            cts?.Cancel();
+            cts?.Dispose();
+            activeTokens.Remove(obj);
+        }
+
         activeObjects.Remove(obj);
         onRelease?.Invoke(obj);
         pool.Enqueue(obj);
@@ -73,5 +85,20 @@ public class ObjectPool<T>
     {
         await UniTask.Delay(TimeSpan.FromSeconds(delaySeconds));
         Release(obj);
+    }
+
+    /// <summary>
+    /// すべてのアクティブなオブジェクトをクリーンアップ
+    /// </summary>
+    public void Cleanup()
+    {
+        foreach (var cts in activeTokens.Values)
+        {
+            cts?.Cancel();
+            cts?.Dispose();
+        }
+        activeTokens.Clear();
+        activeObjects.Clear();
+        pool.Clear();
     }
 }
