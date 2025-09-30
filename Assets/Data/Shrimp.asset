@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Shrimp
   m_EditorClassIdentifier: 
   sushiParameter:
-    type: 1
+    type: 7
     addScore: 10
     price: 100
     fillStomach: 10

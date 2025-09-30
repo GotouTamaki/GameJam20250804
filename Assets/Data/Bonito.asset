@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bonito
   m_EditorClassIdentifier: 
   sushiParameter:
-    type: 5
+    type: 0
     addScore: 10
     price: 100
     fillStomach: 10

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Squid
   m_EditorClassIdentifier: 
   sushiParameter:
-    type: 0
+    type: 8
     addScore: 10
     price: 100
     fillStomach: 10

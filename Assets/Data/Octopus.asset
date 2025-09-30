@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Octopus
   m_EditorClassIdentifier: 
   sushiParameter:
-    type: 8
+    type: 3
     addScore: 10
     price: 100
     fillStomach: 10

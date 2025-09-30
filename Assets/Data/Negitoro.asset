@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Negitoro
   m_EditorClassIdentifier: 
   sushiParameter:
-    type: 9
+    type: 2
     addScore: 10
     price: 100
     fillStomach: 10

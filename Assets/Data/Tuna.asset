@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Tuna
   m_EditorClassIdentifier: 
   sushiParameter:
-    type: 2
+    type: 9
     addScore: 10
     price: 100
     fillStomach: 10

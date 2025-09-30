@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Kappamaki
   m_EditorClassIdentifier: 
   sushiParameter:
-    type: 0
+    type: 1
     addScore: 10
     price: 100
     fillStomach: 10
