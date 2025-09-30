@@ -17,7 +17,7 @@ public class SushiGenerator : MonoBehaviour
     // 種類ごとのプールを Dictionary で管理
     private Dictionary<SushiType, ObjectPool<SushiTouch>> _sushiPools;
 
-    public Dictionary<SushiType, ObjectPool<SushiTouch>> GetObjectPools => _sushiPools;
+    public Dictionary<SushiType, ObjectPool<SushiTouch>> SushitPools => _sushiPools;
 
     void Start()
     {
@@ -27,13 +27,15 @@ public class SushiGenerator : MonoBehaviour
         foreach (var prefab in _generatePrefabs)
         {
             SushiType type = prefab.SushiParameterData.sushiParameter.Type; // ← SushiMove 内で SushiParameter を持っている想定
-            Debug.Log($"[Pool Init] Register {type} from prefab {prefab.name}");
+            //Debug.Log($"[Pool Init] Register {type} from prefab {prefab.name}");
 
+#if UNITY_EDITOR
             // プレハブ名と SushiType の不一致チェック
             if (!prefab.name.Contains(type.ToString()))
             {
                 Debug.LogWarning($"[Pool Init] Prefab {prefab.name} の Type が {type} になっています。設定ミスの可能性があります！");
             }
+#endif
 
             //if (_sushiPools.ContainsKey(type))
             //{
@@ -91,24 +93,28 @@ public class SushiGenerator : MonoBehaviour
 
             if (!_sushiPools.ContainsKey(type))
             {
+#if UNITY_EDITOR
                 Debug.LogError($"[SushiGenerator] {type} が _sushiPools に存在しません！ " +
                                $"num={num}, prefab={_generatePrefabs[num].name}");
+#endif
                 return;
             }
 
             if (_sushiPools.ContainsKey(type))
             {
                 SushiTouch sushiTouch = _sushiPools[type].Get(_lifeTime);
-                Debug.Log($"Choose Num : {num}\nSushi Type {type}");
+                //Debug.Log($"Choose Num : {num}\nSushi Type {type}");
                 SushiMove sushiMove = sushiTouch.SushiMove;
                 sushiMove.gameObject.transform.position = generatePosition;
-                Debug.Log($"Change Position : {sushiMove.gameObject.transform.position}");
+                //Debug.Log($"Change Position : {sushiMove.gameObject.transform.position}");
                 //sushiMove.SetDirection(randamLR == 0 ? MoveDirectionType.Right : MoveDirectionType.Left);
                 sushiMove.SetDirection(MoveDirectionType.Left);
             }
             else
             {
+#if UNITY_EDITOR
                 Debug.LogWarning($"Choose not registration type : {type} !!\nMust registration that type object!!");
+#endif
             }
 
             _timer = 0;
@@ -120,11 +126,11 @@ public class SushiGenerator : MonoBehaviour
     private void OnDestroy()
     {
         // シーン遷移時にプールをクリーンアップ
-        if (_sushiPools != null)
+        if (_sushiPools is not null)
         {
             foreach (var pool in _sushiPools.Values)
             {
-                pool.Cleanup(); // 方法1のCleanup()メソッドが必要
+                pool.Cleanup();
             }
         }
     }

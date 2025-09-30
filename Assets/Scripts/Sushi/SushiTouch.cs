@@ -20,7 +20,7 @@ public class SushiTouch : MonoBehaviour
     // 自分が格納されているプール
     private ObjectPool<SushiTouch> _pool;
 
-    private bool _isEnter = false;
+    //private bool _isEnter = false;
     private bool _isClick = false;
 
     //public SushiParameter SushiParameter => _sushiParameter;
