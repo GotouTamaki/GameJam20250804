@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sushiParameter:
     type: 1
+    _idleSprite: {fileID: 21300000, guid: ea5ba9f77bbc08649841cb8720f6804f, type: 3}
+    _clickSprite: {fileID: 21300000, guid: 95a0dcd243bce5f4a8a7077a0455b4fd, type: 3}
     addScore: 10
     price: 100
     fillStomach: 10
