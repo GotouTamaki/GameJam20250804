@@ -43,6 +43,7 @@ public class SushiMenu : MonoBehaviour
             selected.Add(_allSushis[randomIndex]);
         }
 
+#if UNITY_EDITOR
         foreach (SushiType s in selected)
         {
             switch (s)
@@ -79,6 +80,7 @@ public class SushiMenu : MonoBehaviour
                     break;
             }
         }
+#endif
 
         _freeSushiState.Activate(selected, _freeSushiDuration);
     }
