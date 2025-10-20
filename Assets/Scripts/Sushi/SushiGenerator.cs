@@ -103,11 +103,16 @@ public class SushiGenerator : MonoBehaviour
             if (_sushiPools.ContainsKey(type))
             {
                 SushiTouch sushiTouch = _sushiPools[type].Get(_lifeTime);
-                //Debug.Log($"Choose Num : {num}\nSushi Type {type}");
+
+                // SushiMenu から FreeSushiState を取得して設定
+                SushiMenu sushiMenu = FindAnyObjectByType<SushiMenu>();
+                if (sushiMenu != null)
+                {
+                    sushiTouch.SetFreeSushiState(sushiMenu.GetFreeSushiState());
+                }
+
                 SushiMove sushiMove = sushiTouch.SushiMove;
                 sushiMove.gameObject.transform.position = generatePosition;
-                //Debug.Log($"Change Position : {sushiMove.gameObject.transform.position}");
-                //sushiMove.SetDirection(randamLR == 0 ? MoveDirectionType.Right : MoveDirectionType.Left);
                 sushiMove.SetDirection(MoveDirectionType.Left);
             }
             else

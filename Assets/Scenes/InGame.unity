@@ -976,7 +976,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &849070938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1466,6 +1466,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1121645834}
   m_CullTransparentMesh: 1
+--- !u!1 &1144828245 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2495770671348651556, guid: 8e9de909b1fd8eb4ab219097df96f362, type: 3}
+  m_PrefabInstance: {fileID: 8917460484562415398}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1144828249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1144828245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c85a6c9f39224654abbefcf210e61486, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _freeSushiDuration: 10
 --- !u!1 &1149563181
 GameObject:
   m_ObjectHideFlags: 0
@@ -3103,15 +3121,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2695403648808156352, guid: 8e9de909b1fd8eb4ab219097df96f362, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2695403648808156352, guid: 8e9de909b1fd8eb4ab219097df96f362, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2695403648808156352, guid: 8e9de909b1fd8eb4ab219097df96f362, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3830583854518886719, guid: 8e9de909b1fd8eb4ab219097df96f362, type: 3}
       propertyPath: m_Name
@@ -3136,7 +3154,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2495770671348651556, guid: 8e9de909b1fd8eb4ab219097df96f362, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1144828249}
   m_SourcePrefab: {fileID: 100100000, guid: 8e9de909b1fd8eb4ab219097df96f362, type: 3}
 --- !u!114 &8917460484562415399 stripped
 MonoBehaviour:

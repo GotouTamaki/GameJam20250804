@@ -70,7 +70,7 @@ public class ScoreManager : MonoBehaviour
         set
         {
             _stomachFill = value;
-            Debug.Log("StomachFill updated: " + _stomachFill);
+            //Debug.Log("StomachFill updated: " + _stomachFill);
             UpdateStomachFill();
         }
     }

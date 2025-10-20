@@ -21,15 +21,15 @@ public class SushiMove : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            SetDirection(MoveDirectionType.Left);
-        }
+        //if (Input.GetKeyDown(KeyCode.K))
+        //{
+        //    SetDirection(MoveDirectionType.Left);
+        //}
 
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            SetDirection(MoveDirectionType.Right);
-        }
+        //if (Input.GetKeyDown(KeyCode.M))
+        //{
+        //    SetDirection(MoveDirectionType.Right);
+        //}
 
 
         transform.Translate(moveVector * SushiMoveSpeed * Time.deltaTime);
@@ -42,15 +42,15 @@ public class SushiMove : MonoBehaviour
         {
             case MoveDirectionType.Left:
                 moveVector = Vector3.left;
-                Debug.Log("Direction set to LEFT");
+                //Debug.Log("Direction set to LEFT");
                 break;
             case MoveDirectionType.Right:
                 moveVector = Vector3.right;
-                Debug.Log("Direction set to RIGHT");
+                //Debug.Log("Direction set to RIGHT");
                 break;
             case MoveDirectionType.Stop:
                 moveVector = Vector3.zero;
-                Debug.Log("Direction set to RIGHT");
+                //Debug.Log("Direction set to Stop");
                 break;
         }
     }
