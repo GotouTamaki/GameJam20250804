@@ -25,7 +25,7 @@ public class ScoreManager : MonoBehaviour
     private float _hungerTimer = 0f;
 
     private ReceiptAnimationController _receiptAnimationController = null;
-    private bool _isResult = false;
+    //private bool _isResult = false;
 
     public bool IsFinish => Money <= 100 || StomachFill >= _maxStomachFill;
 
@@ -37,7 +37,7 @@ public class ScoreManager : MonoBehaviour
         UpdateScore();
         UpdateMoney();
         UpdateStomachFill();
-        _isResult = false;
+        //_isResult = false;
 
         _receiptAnimationController = FindAnyObjectByType<ReceiptAnimationController>();
     }
@@ -107,13 +107,14 @@ public class ScoreManager : MonoBehaviour
             }
         }
 
-        if (IsFinish && !_isResult)
+        if (IsFinish /*&& !_isResult*/)
         {
             SoundManager.Instance.PlayReceiptSFX();
             _receiptScoreText.text = Score.ToString();
             _receiptMoneyText.text = Money.ToString();
             StartCoroutine(_receiptAnimationController.SlideToTarget());
-            _isResult = true;
+            //_isResult = true;
+            UIManager.Instance.IsPlayGame = false;
         }
     }
 

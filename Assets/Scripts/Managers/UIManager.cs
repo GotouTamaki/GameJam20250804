@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
 
     public TMP_Text countdownText;  // Assign your countdown text here
+    public bool IsPlayGame = false;
 
     void Awake()
     {
@@ -28,6 +29,7 @@ public class UIManager : MonoBehaviour
         if (countdownText == null)
             yield return null;
 
+        IsPlayGame = false;
         string[] countdown = { "3", "2", "1", "Start" };
 
         SoundManager.Instance?.PlayCountdownSFX();
@@ -51,5 +53,7 @@ public class UIManager : MonoBehaviour
 
         if (SoundManager.Instance != null) // Changes music on start
             SoundManager.Instance.PlayMusic(SoundManager.Instance.gameBgm);
+
+        IsPlayGame = true;
     }
 }

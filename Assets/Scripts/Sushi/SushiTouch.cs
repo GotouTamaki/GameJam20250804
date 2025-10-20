@@ -148,7 +148,7 @@ public class SushiTouch : MonoBehaviour
 
     public void OnMouseDown()
     {
-        if (!_isClick)
+        if (UIManager.Instance.IsPlayGame && !_isClick)
         {
             SoundManager.Instance.PlayShootSFX();
             _scoreManager.AddScore(_sushiParameter.AddScore);
