@@ -47,6 +47,8 @@ MonoBehaviour:
   _initScore: 0
   _initMoney: 10000
   _maxStomachFill: 100
+  _decreaseStpaomachFillPerSecond: 2
+  _decreaseStomachFillTime: 0.5
   _scoreText: {fileID: 0}
   _moneyText: {fileID: 0}
   _receiptScoreText: {fileID: 0}

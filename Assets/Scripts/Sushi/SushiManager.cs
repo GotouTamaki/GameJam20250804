@@ -3,6 +3,4 @@
 public class SushiManager : MonoBehaviour
 {
     [SerializeField] SushiMove sushiMove;
-
-
 }

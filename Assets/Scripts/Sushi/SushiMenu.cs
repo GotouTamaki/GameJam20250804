@@ -1,19 +1,23 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SushiMenu : MonoBehaviour
 {
+    [SerializeField] private SushiTouch[] _allSushis;
+    [SerializeField] private Image[] _menuImages;
     [SerializeField] private int _selectfreeSushiTypeCount = 4;
     [SerializeField] private float _freeSushiDuration = 10f;
 
     private FreeSushiState _freeSushiState;
-    List<SushiType> _allSushis = new List<SushiType>();
+
+    public SushiTouch[] AllSushuis => _allSushis;
 
     public FreeSushiState FreeSushiState => _freeSushiState;
 
     void Start()
     {
-        _allSushis = new List<SushiType>((SushiType[])System.Enum.GetValues(typeof(SushiType)));
+        //_allSushisList = new List<SushiType>((SushiType[])System.Enum.GetValues(typeof(SushiType)));
         _freeSushiState = new FreeSushiState();
         SelectSushiType();
     }
@@ -35,18 +39,21 @@ public class SushiMenu : MonoBehaviour
 
     public void SelectSushiType()
     {
-        HashSet<SushiType> selected = new HashSet<SushiType>();
+        HashSet<SushiTouch> selected = new HashSet<SushiTouch>();
 
+        // 重複なしの選択方法はもっといい方法があるだろうがが一旦これで
         while (selected.Count < _selectfreeSushiTypeCount)
         {
-            int randomIndex = Random.Range(0, _allSushis.Count);
+            int randomIndex = Random.Range(0, _allSushis.Length);
             selected.Add(_allSushis[randomIndex]);
         }
 
+
+
 #if UNITY_EDITOR
-        foreach (SushiType s in selected)
+        foreach (SushiTouch s in selected)
         {
-            switch (s)
+            switch (s.SushiParameterData.sushiParameter.Type)
             {
                 case SushiType.Bonito:
                     Debug.Log("Bonitoが選ばれた");
@@ -81,6 +88,14 @@ public class SushiMenu : MonoBehaviour
             }
         }
 #endif
+
+        int index = 0;
+
+        foreach (SushiTouch s in selected)
+        {
+            _menuImages[index].sprite = s.SushiParameterData.sushiParameter.MenuSprite;
+            index++;
+        }
 
         _freeSushiState.Activate(selected, _freeSushiDuration);
     }

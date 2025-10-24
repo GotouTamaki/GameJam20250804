@@ -8,6 +8,10 @@ public class ScoreManager : MonoBehaviour
     [SerializeField, Header("初期所持金")] private int _initMoney = default;
     [SerializeField, Header("最大満腹値")] private float _maxStomachFill = 100f;
 
+    [SerializeField, Header("減少満腹値(/s)")] private float _decreaseStpaomachFillPerSecond = 1f;
+
+    [SerializeField, Header("減少満腹値時間(s)")] private float _decreaseStomachFillTime = 1f;
+
     [Header("オブジェクトアタッチ用")]
     [SerializeField] private TextMeshProUGUI _scoreText = default;
     [SerializeField] private TextMeshProUGUI _moneyText = default;
@@ -21,7 +25,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private Sprite _girlImagePerfentFull;
 
 
-    [SerializeField, Range(0, 150)]private int _stomachFill = default;
+    [SerializeField, Range(0, 150)]private float _stomachFill = default;
     private float _hungerTimer = 0f;
 
     private ReceiptAnimationController _receiptAnimationController = null;
@@ -64,7 +68,7 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    public int StomachFill
+    public float StomachFill
     {
         get { return _stomachFill; }
         set
@@ -97,10 +101,12 @@ public class ScoreManager : MonoBehaviour
     private void Update()
     {
         _hungerTimer += Time.deltaTime;
-        if (_hungerTimer >= 1f) // 1秒ごとに満腹値を減らす
+
+        if (!IsFinish &&_hungerTimer >= _decreaseStomachFillTime) // 1秒ごとに満腹値を減らす
         {
             _hungerTimer = 0f;
-            StomachFill -= 1; // 満腹値を1減らす
+            StomachFill -= _decreaseStpaomachFillPerSecond; // 満腹値を1減らす
+
             if (StomachFill < 0)
             {
                 StomachFill = 0; // 満腹値の下限を設定
@@ -134,7 +140,9 @@ public class ScoreManager : MonoBehaviour
         {
             _stomachFill = (int)_maxStomachFill; // 満腹値の上限を設定
         }
+
         _stomachFillSlider.value = StomachFill; // Assuming max stomach fill is 100
+
         if (StomachFill >= _maxStomachFill)
         {
             _girlImage.sprite = _girlImagePerfentFull; // 完全満腹状態の画像

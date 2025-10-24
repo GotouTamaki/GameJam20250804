@@ -10,12 +10,12 @@ public class FreeSushiState
     public bool IsActive => _isActive;
     public float RemainingTime => _isActive ? (_duration - _elapsed) : 0f;
 
-    public void Activate(HashSet<SushiType> sushiTypes, float duration)
+    public void Activate(HashSet<SushiTouch> sushiTypes, float duration)
     {
         _freeSushiTypes.Clear();
         foreach (var type in sushiTypes)
         {
-            _freeSushiTypes.Add(type);
+            _freeSushiTypes.Add(type.SushiParameterData.sushiParameter.Type);
         }
         _duration = duration;
         _elapsed = 0f;

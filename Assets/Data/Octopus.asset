@@ -16,6 +16,7 @@ MonoBehaviour:
     type: 3
     _idleSprite: {fileID: 21300000, guid: a15fa91cef8b090479d448f30d010331, type: 3}
     _clickSprite: {fileID: 21300000, guid: b131655f041db584a94132fd4b5ccd2e, type: 3}
+    _menuSprite: {fileID: 21300000, guid: aa79b5ac234c1c547a403b6f0865a7ac, type: 3}
     addScore: 10
     price: 100
     fillStomach: 10

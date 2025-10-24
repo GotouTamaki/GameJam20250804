@@ -341,13 +341,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3529d4050ecdee40bdf8f4263595560, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _clickSprite: {fileID: 21300000, guid: a622a2a9894295646b4b3eab2f1a9727, type: 3}
   _data: {fileID: 11400000, guid: f5e9ec460067bc048ad715377257f353, type: 2}
   _textMeshPro: {fileID: 4322833692654267966}
-  _targetLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
   _destroyDelayTime: 0.5
+  _freeSushiTextGradient:
+    serializedVersion: 2
+    key0: {r: 0, g: 0, b: 1, a: 1}
+    key1: {r: 0, g: 1, b: 1, a: 1}
+    key2: {r: 1, g: 1, b: 0, a: 0}
+    key3: {r: 1, g: 0, b: 0, a: 0}
+    key4: {r: 1, g: 0, b: 1, a: 0}
+    key5: {r: 0, g: 0, b: 1, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 13107
+    ctime2: 26214
+    ctime3: 39321
+    ctime4: 52428
+    ctime5: 65535
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 6
+    m_NumAlphaKeys: 2
 --- !u!70 &2777264748830375314
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

@@ -250,9 +250,9 @@ GameObject:
   - component: {fileID: 8300659042247194792}
   - component: {fileID: 4986965616451487496}
   - component: {fileID: 2777264748830375314}
-  - component: {fileID: 6889563870177998672}
+  - component: {fileID: 1171712466997859396}
   m_Layer: 6
-  m_Name: Bonito
+  m_Name: Kappamaki
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -318,7 +318,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 07c2bf4ff3d54c940a1b54202c6f405d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ea5ba9f77bbc08649841cb8720f6804f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -341,7 +341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3529d4050ecdee40bdf8f4263595560, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _data: {fileID: 11400000, guid: d10cf10b81a0410459dc1b19bf008f71, type: 2}
+  _data: {fileID: 11400000, guid: 7e4210cb9a36a8f46a6b82e571dd307d, type: 2}
   _textMeshPro: {fileID: 4322833692654267966}
   _destroyDelayTime: 0.5
   _freeSushiTextGradient:
@@ -411,7 +411,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.31}
   m_Size: {x: 1.24, y: 0.82}
   m_Direction: 1
---- !u!114 &6889563870177998672
+--- !u!114 &1171712466997859396
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

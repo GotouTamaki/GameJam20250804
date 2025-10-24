@@ -5,12 +5,13 @@ public class SushiGenerator : MonoBehaviour
 {
     [SerializeField] private Transform[] _leftGenerateTransforms;
     [SerializeField] private Transform[] _rightGenerateTransforms;
-    [SerializeField] private SushiTouch[] _generatePrefabs;
     [SerializeField] private int[] _generateWeights;
     [SerializeField] private float _initInterval = 0.5f;
     [SerializeField] private float _minLimmitInterval = 0.1f;
     [SerializeField] private float _lifeTime = 5f;
 
+    private SushiTouch[] _generatePrefabs;
+    private SushiMenu _sushiMenu;
     private float _currentInterval = 0.5f;
     private float _timer = 0;
 
@@ -21,6 +22,8 @@ public class SushiGenerator : MonoBehaviour
 
     void Start()
     {
+        _sushiMenu = FindAnyObjectByType<SushiMenu>();
+        _generatePrefabs = _sushiMenu.AllSushuis;
         _sushiPools = new Dictionary<SushiType, ObjectPool<SushiTouch>>();
 
 
@@ -105,10 +108,9 @@ public class SushiGenerator : MonoBehaviour
                 SushiTouch sushiTouch = _sushiPools[type].Get(_lifeTime);
 
                 // SushiMenu から FreeSushiState を取得して設定
-                SushiMenu sushiMenu = FindAnyObjectByType<SushiMenu>();
-                if (sushiMenu != null)
+                if (_sushiMenu != null)
                 {
-                    sushiTouch.SetFreeSushiState(sushiMenu.GetFreeSushiState());
+                    sushiTouch.SetFreeSushiState(_sushiMenu.GetFreeSushiState());
                 }
 
                 SushiMove sushiMove = sushiTouch.SushiMove;
