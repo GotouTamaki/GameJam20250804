@@ -6,6 +6,7 @@ public class SushiParameter
     [SerializeField] private SushiType type = SushiType.Squid;
     [SerializeField] private Sprite _idleSprite;
     [SerializeField] private Sprite _clickSprite;
+    [SerializeField] private Sprite _menuSprite;
     [SerializeField] private int addScore = 10;
     [SerializeField] private int price = 100;
     [SerializeField] private int fillStomach = 10;
@@ -15,6 +16,8 @@ public class SushiParameter
     public Sprite IdleSprite => _idleSprite;
 
     public Sprite ClickSprite => _clickSprite;
+
+    public Sprite MenuSprite => _menuSprite;
 
     public int AddScore => addScore;
 

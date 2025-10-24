@@ -329,7 +329,7 @@ MonoBehaviour:
   _generateWeights: 320000003200000032000000320000003200000032000000
   _initInterval: 0.5
   _minLimmitInterval: 0.1
-  _lifeTime: 3
+  _lifeTime: 2.38
 --- !u!1 &7654011956909724724
 GameObject:
   m_ObjectHideFlags: 0

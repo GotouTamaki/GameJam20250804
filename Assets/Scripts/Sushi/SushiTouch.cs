@@ -9,7 +9,7 @@ public class SushiTouch : MonoBehaviour
     [SerializeField] private SushiParameterData _data;
     [SerializeField] private TMP_Text _textMeshPro;
     [SerializeField] private float _destroyDelayTime = 0.5f;
-    [SerializeField] private Color _freeSushiTextColor = Color.yellow;
+    [SerializeField] private Gradient _freeSushiTextGradient;
 
     private SpriteRenderer _spriteRenderer;
     private SushiParameter _sushiParameter;
@@ -20,6 +20,9 @@ public class SushiTouch : MonoBehaviour
     // 自分が格納されているプール
     private ObjectPool<SushiTouch> _pool;
     private FreeSushiState _freeSushiState;
+    //色を変える時間と現在の時間
+    private readonly float FADE_COLOR_TIME = 4.0f;
+    private float _currentTime = 0;
 
     //private bool _isEnter = false;
     private bool _isClick = false;
@@ -80,7 +83,12 @@ public class SushiTouch : MonoBehaviour
 
         if (_freeSushiState.IsFreeSushi(_sushiParameter.Type))
         {
-            _textMeshPro.color = _freeSushiTextColor;
+            //時間を進める
+            _currentTime += Time.deltaTime;
+            var timeRate = Mathf.Min(1f, _currentTime / FADE_COLOR_TIME);
+
+            //色を変更
+            _textMeshPro.color = _freeSushiTextGradient.Evaluate(timeRate);
         }
         else
         {
